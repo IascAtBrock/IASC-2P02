@@ -1,2 +1,1 @@
-# IASC-2P02
-Repository for IASC 2P01 Course
+# IASC-2P02 - Alex Christie
