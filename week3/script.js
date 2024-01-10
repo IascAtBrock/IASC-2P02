@@ -34,7 +34,14 @@ const sphereGeometry = new THREE.SphereGeometry(1)
 const sphereMaterial = new THREE.MeshNormalMaterial()
 const testSphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
 
-scene.add(testSphere)
+//scene.add(testSphere)
+
+// testCube
+const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)
+const cubeMaterial = new THREE.MeshNormalMaterial()
+const testCube = new THREE.Mesh(cubeGeometry, cubeMaterial)
+
+scene.add(testCube)
 
 /*******************
 ** ANIMATION LOOP **
@@ -48,7 +55,18 @@ const animation = () =>
     const elapsedTime = clock.getElapsedTime()
 
     // Animate testSphere
-    testSphere.position.z = Math.sin(elapsedTime)
+    //testSphere.position.z = Math.sin(elapsedTime)
+
+    // Animate testCube
+    // Rotate testCube
+    testCube.rotation.x = elapsedTime
+    testCube.rotation.y = elapsedTime
+    testCube.rotation.z = elapsedTime
+
+    // Scale testCube
+    testCube.scale.x = Math.sin(elapsedTime * 0.5) * 2
+    testCube.scale.y = Math.sin(elapsedTime * 0.5) * 2
+    testCube.scale.z = Math.sin(elapsedTime * 0.5) * 2
 
     // Renderer
     renderer.render(scene, camera)
