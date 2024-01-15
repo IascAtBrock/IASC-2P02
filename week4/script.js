@@ -39,6 +39,7 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
+renderer.localClippingEnabled = false
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
@@ -47,6 +48,9 @@ controls.enableDamping = true
 /***********
 ** MESHES **
 ************/
+// Clipping Plane
+const clippingPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0)
+
 // plane
 const planeGeometry = new THREE.PlaneGeometry(10, 10, 50, 50)
 const planeMaterial = new THREE.MeshBasicMaterial({
@@ -61,7 +65,9 @@ scene.add(plane)
 
 // testSphere
 const geometry = new THREE.SphereGeometry(1)
-const material = new THREE.MeshNormalMaterial()
+const material = new THREE.MeshNormalMaterial({
+    clippingPlanes: [ clippingPlane ]
+})
 const testSphere = new THREE.Mesh(geometry, material)
 
 scene.add(testSphere)
@@ -95,6 +101,10 @@ sphereFolder
 sphereFolder
     .add(uiObject, 'play')
     .name('Animate sphere')
+
+sphereFolder
+    .add(renderer, 'localClippingEnabled')
+    .name('Clip')    
 
 /*******************
 ** ANIMATION LOOP **
