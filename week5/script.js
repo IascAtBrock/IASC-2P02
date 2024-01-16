@@ -28,7 +28,7 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     100
 )
-camera.position.set(5.6, 2.3, 7)
+camera.position.set(9.9, 3.5, 10.5)
 scene.add(camera)
 
 // Renderer
@@ -83,6 +83,15 @@ torusKnot.position.set(6, 1.5, 0)
 torusKnot.castShadow = true
 scene.add(torusKnot)
 
+// SUN
+const sunGeometry = new THREE.SphereGeometry()
+const sunMaterial = new THREE.MeshLambertMaterial({
+    emissive: new THREE.Color('orange'),
+    emissiveIntensity: 20
+})
+const sun = new THREE.Mesh(sunGeometry, sunMaterial)
+scene.add(sun)
+
 /***********
 ** LIGHTS **
 ************/
@@ -100,7 +109,7 @@ const directionalLight = new THREE.DirectionalLight(
     0.5
 )
 directionalLight.target = caveWall
-directionalLight.position.set(8.6, 1.7, 0)
+directionalLight.position.set(10, 2.5, 0)
 directionalLight.castShadow = true
 directionalLight.shadow.mapSize.width = 1024
 directionalLight.shadow.mapSize.height = 1024
@@ -165,6 +174,11 @@ const animation = () =>
 
     // Update directionalLightHelper
     //directionalLightHelper.update()
+
+    // Update sun position to match directionalLight position
+    sun.position.copy(directionalLight.position)
+
+    console.log(camera.position)
 
     // Controls
     controls.update()
