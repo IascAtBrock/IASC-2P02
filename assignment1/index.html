@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <title>Assignment 1</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- three.js importmap -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://ga.jspm.io/npm:three@0.158.0/build/three.module.js",
+                "OrbitControls": "https://ga.jspm.io/npm:three@0.158.0/examples/jsm/controls/OrbitControls.js",
+                "lil-gui": "https://ga.jspm.io/npm:lil-gui@0.19.1/dist/lil-gui.esm.js"
+            }
+        }
+    </script>
+
+    <!-- three.js scene -->
+    <script src="script.js" type="module"></script>
+</head>
+<body>
+    <h1>Interactive Essay</h1>
+    <h2>Alex Christie</h2>
+
+    <!-- part one -->
+    <section id="part-one">
+        <h2>1. Flatness</h2>
+
+        <p>First paragraph goes here. All of a sudden <span class="clickable" id="first-change">the object began to move strangely</span>.</p>
+
+        <p>Second paragraph goes here. And then, <span class="clickable" id="second-change">the object fell off the face of the earth</span>.</p>
+
+        <p><span class="clickable" id="continue-reading">Continue reading</span></p>
+    </section>
+
+    <!-- part two -->
+    <section id="part-two" class="hidden">
+        <h2>2. Seeing Double</h2>
+
+        <p>First paragraph goes here. But then, <span class="clickable" id="third-change">the object came to rest</span>.</p>
+
+        <p>Second paragraph goes here. And then, <span class="clickable" id="fourth-change">the sun began to set behind it,</span> mystifying the people in the cave.</p>
+
+        <p><span class="clickable" id="restart">Restart</span></p>
+    </section>
+
+    <canvas class="webgl"></canvas>
+</body>
