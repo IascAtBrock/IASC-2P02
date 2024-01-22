@@ -194,7 +194,6 @@ const animation = () => {
    if(model){
     model.rotation.y = elapsedTime * 0.5
    }
-   */
   // Part 2
   if(domObject.part === 2){
     if(model.rotation.y <= Math.PI * 0.5){
@@ -217,6 +216,7 @@ const animation = () => {
         }
     }
     }
+    */
 
     // CURSOR CONTROL - MODEL
     if(model)
