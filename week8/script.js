@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import { GLTFLoader } from "GLTFLoader"
 
 /**********
 ** SETUP **
@@ -10,7 +11,7 @@ const sizes = {
     aspectRatio: window.innerWidth / window.innerHeight
 }
 
-let xDistance = 1
+let xDistance = 2
 let meshSize = 1
 
 // Mobile
@@ -52,6 +53,7 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     100
 )
+camera.position.set(0, 0, 5)
 scene.add(camera)
 
 // Renderer
@@ -63,6 +65,13 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 
 /***********
+** LIGHTS **
+************/
+// directionalLight
+const directionalLight = new THREE.DirectionalLight(0x404040, 100)
+scene.add(directionalLight)
+
+/***********
 ** MESHES **
 ************/
 // Cube
@@ -71,7 +80,35 @@ const cubeMaterial = new THREE.MeshNormalMaterial()
 const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
 
 cube.position.set(-xDistance, 0, -3)
-scene.add(cube)
+//scene.add(cube)
+
+/*****************
+** GLTF MODELS **
+*****************/
+const loader = new GLTFLoader()
+let model = null
+
+loader.load(
+    // Resource url
+    'assets/porsche/scene.gltf',
+    // Called when resource is loaded
+    function(gltf){
+        model = gltf.scene
+
+        model.position.set(-xDistance, 0, 0)
+        model.scale.set(meshSize, meshSize, meshSize)
+
+        scene.add(model)
+    },
+    // Called while loading is progressing
+    function(xhr){
+        console.log('loading 3d model')
+    },
+    // Called when loading has errors
+    function(error){
+        console.log('Error loading 3d model')
+    }
+)
 
 /*********************
 ** DOM INTERACTIONS **
@@ -101,6 +138,21 @@ document.querySelector('#click3').onclick = function() {
     domObject.part = 1
 }
 
+/***********
+** CURSOR **
+************/
+const cursor = {
+    x: 0,
+    y: 0
+}
+
+window.addEventListener('mousemove', () =>
+{
+    cursor.x = event.clientX / sizes.width - 0.5
+    cursor.y = -event.clientY / sizes.height + 0.5
+    
+})
+
 /*******************
 ** ANIMATION LOOP **
 *******************/
@@ -111,7 +163,8 @@ const animation = () => {
     // Return elapsedTime
     const elapsedTime = clock.getElapsedTime()
 
-    // DOM INTERACTIONS
+    /*
+    // DOM INTERACTIONS - CUBE
     // Part 2
     if(domObject.part === 2){
         //console.log('play part 2 animation')
@@ -134,6 +187,42 @@ const animation = () => {
             cube.rotation.y -= 0.02
             cube.rotation.z -= 0.02
         }
+    }
+    */
+   // DOM INTERACTIONS - MODEL
+   /*
+   if(model){
+    model.rotation.y = elapsedTime * 0.5
+   }
+   */
+  // Part 2
+  if(domObject.part === 2){
+    if(model.rotation.y <= Math.PI * 0.5){
+        model.rotation.y += 0.02
+    }
+    }
+    // Part 3
+    if(domObject.part === 3){
+        if(model.rotation.z <= Math.PI * 0.5){
+            model.rotation.z += 0.02
+        }
+    }
+
+    // Reset
+    if(domObject.part == 1){
+        if(model){
+        if(model.rotation.y >= 0 && model.rotation.z >= 0){
+            model.rotation.y -= 0.02
+            model.rotation.z -= 0.02
+        }
+    }
+    }
+
+    // CURSOR CONTROL - MODEL
+    if(model)
+    {
+        model.rotation.y = cursor.x * 2
+        model.rotation.x = cursor.y + .25
     }
 
     // Renderer

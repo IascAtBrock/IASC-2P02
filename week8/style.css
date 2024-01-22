@@ -48,3 +48,21 @@ body {
 .hidden {
     display: none;
 }
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+}
+
+.footer a{
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
