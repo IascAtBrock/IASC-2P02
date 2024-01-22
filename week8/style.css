@@ -1,0 +1,50 @@
+body {
+    background-color: #404040;
+    margin: 0 auto;
+    color: white;
+}
+
+.webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    z-index: -1;
+}
+
+.splash {
+    position: absolute;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.splash h1 {
+    font-size: 80px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    font-size: 60px;
+    padding-left: 50%;
+}
+
+.content h1 {
+    margin-bottom: 0px;
+}
+
+.clickable {
+    color: orange;
+    cursor: grab;
+}
+
+.clickable:hover {
+    color: aqua;
+}
+
+.hidden {
+    display: none;
+}
