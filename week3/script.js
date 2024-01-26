@@ -55,15 +55,15 @@ const animation = () =>
     const elapsedTime = clock.getElapsedTime()
 
     // Animate testSphere
-    //testSphere.position.z = Math.sin(elapsedTime)
+    //testSphere.position.z = Math.sin(elapsedTime * 2) / 0.5
 
-    // Animate testCube
-    // Rotate testCube
+    // Animate testCube 1
+    // Rotate cube
     testCube.rotation.x = elapsedTime
     testCube.rotation.y = elapsedTime
     testCube.rotation.z = elapsedTime
 
-    // Scale testCube
+    // Scale cube
     testCube.scale.x = Math.sin(elapsedTime * 0.5) * 2
     testCube.scale.y = Math.sin(elapsedTime * 0.5) * 2
     testCube.scale.z = Math.sin(elapsedTime * 0.5) * 2
