@@ -39,7 +39,7 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
-renderer.localClippingEnabled = false
+renderer.localClippingEnabled = true
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
@@ -81,12 +81,18 @@ const ui = new dat.GUI()
 // UI Object
 const uiObject = {}
 uiObject.play = false
+uiObject.speed = 0.5
+uiObject.distance = 2
 
 // Plane UI
 const planeFolder = ui.addFolder('Plane')
 
 planeFolder
     .add(planeMaterial, 'wireframe')
+
+planeFolder
+    .add(renderer, 'localClippingEnabled')
+    .name("Clippin")
 
 // Sphere UI
 const sphereFolder = ui.addFolder('Sphere')
@@ -97,6 +103,20 @@ sphereFolder
     .max(5)
     .step(0.1)
     .name('Height')
+
+sphereFolder
+    .add(uiObject, 'speed')
+    .min(0.1)
+    .max(10)
+    .step(0.1)
+    .name("Speed")
+
+sphereFolder
+    .add(uiObject, 'distance')
+    .min(0.1)
+    .max(3)
+    .step(0.1)
+    .name("Distance")
 
 sphereFolder
     .add(uiObject, 'play')
@@ -120,7 +140,7 @@ const animation = () =>
     // Animate sphere
     if(uiObject.play)
     {
-        testSphere.position.y = Math.sin(elapsedTime * 0.5) * 2
+        testSphere.position.y = Math.sin(elapsedTime * uiObject.speed) * uiObject.distance
     }
 
     // Controls
