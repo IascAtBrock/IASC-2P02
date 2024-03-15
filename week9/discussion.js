@@ -58,13 +58,17 @@ const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
 
 // Cube Materials
 const redMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('red')
+    color: new THREE.Color('red'),
+    name: 'voldemort',
+    wireframe: true
 })
 const greenMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('green')
+    color: new THREE.Color('green'),
+    wireframe: true
 })
 const blueMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('blue')
+    color: new THREE.Color('blue'),
+    wireframe: true
 })
 
 const drawCube = (i, material) =>
@@ -77,6 +81,8 @@ const drawCube = (i, material) =>
     cube.rotation.x = Math.random() * 2 * Math.PI
     cube.rotation.y = Math.random() * 2 * Math.PI
     cube.rotation.z = Math.random() * 2 * Math.PI
+
+    cube.name = material.name
 
     scene.add(cube)
 }
@@ -232,7 +238,19 @@ const animation = () =>
         camera.position.x = Math.sin(elapsedTime * 0.2) * 16
         camera.position.z = Math.cos(elapsedTime * 0.2) * 16
     }
-
+    
+    // Voldermort gets bigger
+    /*
+    for(let i=0; i < scene.children.length; i++)
+    {
+        if(scene.children[i].name === "voldemort")
+        {
+            scene.children[i].scale.x = i * 0.01
+            scene.children[i].scale.y = i * 0.01
+            scene.children[i].scale.z = i * 0.01
+        }
+    }
+    */
 
     // Renderer
     renderer.render(scene, camera)
