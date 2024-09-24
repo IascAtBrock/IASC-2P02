@@ -1,0 +1,30 @@
+body {
+    background-color: gray;
+    color: white;
+    width: fit-content;
+    margin-top: 0 auto;
+    text-align: left;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+li {
+    font-size: 24px;
+    list-style-type: none;
+}
+
+a {
+    color: orange;
+    text-decoration: none;
+}
+
+a:hover {
+    color: aqua;
+    text-decoration: overline;
+}
