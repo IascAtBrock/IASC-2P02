@@ -91,7 +91,7 @@ directionalLight.shadow.mapSize.height = 2048
 
 // Directional Light Helper
 const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
-scene.add(directionalLightHelper)
+//scene.add(directionalLightHelper)
 
 /*******
 ** UI **
